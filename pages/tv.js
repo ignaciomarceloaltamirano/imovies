@@ -11,7 +11,7 @@ const MoviesPage = () => {
   const { back } = useRouter();
 
   const { data: tv, error } = useSWR(
-    `https://api.themoviedb.org/3/discover/tv/?api_key=${process.env.API_KEY}&page=${pageCount}`
+    `https://api.themoviedb.org/3/discover/tv/?api_key=2a3efbbdcc66ed82dfbc4902bb7c157c&page=${pageCount}`
   );
   if (error) console.error(error);
 
