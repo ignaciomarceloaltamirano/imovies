@@ -9,7 +9,6 @@ import { btnStyle } from '../utils/utils';
 const MoviesPage = () => {
   const [pageCount, setPageCount] = useState(1);
   const { back } = useRouter();
-  const media = 'tv';
 
   const { data: tv, error } = useSWR(
     `https://api.themoviedb.org/3/discover/tv/?api_key=${process.env.API_KEY}&page=${pageCount}`
@@ -33,7 +32,7 @@ const MoviesPage = () => {
     <section className="container mx-auto my-6">
       <h2 className="text-xl text-center my-6">Discover TV Shows</h2>
       <div className="flex items-center justify-between">
-        <SearchInput handleSubmit={handleSubmit} media={media} />
+        <SearchInput handleSubmit={handleSubmit} media="tv" />
         <button className={btnStyle} onClick={() => back()}>
           Go back
         </button>
@@ -43,7 +42,7 @@ const MoviesPage = () => {
           <Loader />
         ) : (
           tv?.results.map((item) => (
-            <Card id={item.id} key={item.id} item={item} media={media} />
+            <Card id={item.id} key={item.id} item={item} media="tv" />
           ))
         )}
       </div>

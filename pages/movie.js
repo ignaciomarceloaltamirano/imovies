@@ -4,13 +4,11 @@ import Loader from '../components/Loader';
 import SearchInput from '../components/SearchInput';
 import Card from '../components/Card';
 import { useRouter } from 'next/router';
+import { btnStyle } from '../utils/utils';
 
 const MoviesPage = () => {
   const [pageCount, setPageCount] = useState(1);
   const { back } = useRouter();
-  const media = 'movie';
-  const btnStyle =
-    'bg-secondary-color hover:bg-primary-color transition-all ease-in duration-300 mr-3 sm:px-4 px-2 py-2 sm:text-base text-sm rounded';
 
   const { data: movies, error } = useSWR(
     `https://api.themoviedb.org/3/discover/movie/?api_key=${process.env.API_KEY}&page=${pageCount}`
@@ -30,7 +28,7 @@ const MoviesPage = () => {
     <section className="container mx-auto my-6">
       <h2 className="text-xl text-center my-6">Discover Movies</h2>
       <div className="flex items-center justify-between">
-        <SearchInput media={media} />
+        <SearchInput media="movie" />
         <button className={btnStyle} onClick={() => back()}>
           Go back
         </button>
@@ -40,7 +38,7 @@ const MoviesPage = () => {
           <Loader />
         ) : (
           movies?.results.map((item) => (
-            <Card id={item.id} key={item.id} item={item} media={media} />
+            <Card id={item.id} key={item.id} item={item} media="movie" />
           ))
         )}
       </div>

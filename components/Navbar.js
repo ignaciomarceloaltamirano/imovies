@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
 import { useSession, signIn, signOut, getSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useMainContext } from '../context/mainContext';
