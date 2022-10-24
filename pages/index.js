@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Home from '../components/Home';
+import Head from 'next/head';
 
 export default function HomePage({
   trendingMovies,
@@ -9,6 +10,12 @@ export default function HomePage({
 }) {
   return (
     <main className="mx-4 sm:mx-0">
+      <Head>
+        <meta
+          http-equiv="Content-Security-Policy"
+          content="upgrade-insecure-requests"
+        />
+      </Head>
       <Home
         trendingMovies={trendingMovies}
         trendingSeries={trendingSeries}
