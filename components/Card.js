@@ -2,6 +2,7 @@
 import Link from 'next/link';
 
 const Card = ({ id, item, media }) => {
+  console.log(media);
   const cardStyle =
     'rounded flex justify-center align-center flex-col p-2 hover:bg-primary-color bg-secondary-color transition-all ease-in duration-200 cursor-pointer relative ';
   return (
