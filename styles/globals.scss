@@ -89,6 +89,27 @@ section {
   color: var(--primary-color);
 }
 
+.theme-btn {
+  position: fixed;
+  bottom: 4vh;
+  left: 4vw;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  z-index: 989;
+  transition: background-color 300ms ease-in;
+  width: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.7rem;
+
+  &:hover {
+    background-color: var(--secondary-color);
+  }
+}
+
 @media screen and (max-width: 768px) {
   iframe {
     height: 400px;

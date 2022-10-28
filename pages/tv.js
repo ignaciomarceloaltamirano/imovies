@@ -5,6 +5,7 @@ import Loader from '../components/Loader';
 import SearchInput from '../components/SearchInput';
 import Card from '../components/Card';
 import { btnStyle } from '../utils/utils';
+import toast from 'react-hot-toast';
 
 const MoviesPage = () => {
   const [pageCount, setPageCount] = useState(1);
@@ -13,7 +14,7 @@ const MoviesPage = () => {
   const { data: tv, error } = useSWR(
     `https://api.themoviedb.org/3/discover/tv/?api_key=2a3efbbdcc66ed82dfbc4902bb7c157c&page=${pageCount}`
   );
-  if (error) console.error(error);
+  if (error) toast.error(error);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,9 +32,9 @@ const MoviesPage = () => {
   return (
     <section className="container mx-auto my-6">
       <h2 className="text-xl text-center my-6">Discover TV Shows</h2>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between sm:mx-0 mx-4">
         <SearchInput handleSubmit={handleSubmit} media="tv" />
-        <button className={btnStyle} onClick={() => back()}>
+        <button className={`${btnStyle} mt-0 px-1`} onClick={() => back()}>
           Go back
         </button>
       </div>

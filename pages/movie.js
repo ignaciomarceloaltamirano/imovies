@@ -5,6 +5,7 @@ import SearchInput from '../components/SearchInput';
 import Card from '../components/Card';
 import { useRouter } from 'next/router';
 import { btnStyle } from '../utils/utils';
+import toast from 'react-hot-toast';
 
 const MoviesPage = () => {
   const [pageCount, setPageCount] = useState(1);
@@ -13,7 +14,7 @@ const MoviesPage = () => {
   const { data: movies, error } = useSWR(
     `https://api.themoviedb.org/3/discover/movie/?api_key=2a3efbbdcc66ed82dfbc4902bb7c157c&page=${pageCount}`
   );
-  if (error) console.error(error);
+  if (error) toast.error(error);
 
   const prevPage = () => {
     if (pageCount < 1) return;
@@ -27,9 +28,9 @@ const MoviesPage = () => {
   return (
     <section className="container mx-auto my-6">
       <h2 className="text-xl text-center my-6">Discover Movies</h2>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between sm:mx-0 mx-4">
         <SearchInput media="movie" />
-        <button className={btnStyle} onClick={() => back()}>
+        <button className={`${btnStyle} mt-0 px-1`} onClick={() => back()}>
           Go back
         </button>
       </div>

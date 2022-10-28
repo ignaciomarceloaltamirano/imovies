@@ -4,19 +4,20 @@ import Loader from '../../../components/Loader';
 import SearchInput from '../../../components/SearchInput';
 import Card from '../../../components/Card';
 import { useRouter } from 'next/router';
+import NoResults from '../../../components/NoResults';
+import { btnStyle } from '../../../utils/utils';
+import toast from 'react-hot-toast';
 
 const TvSearchPage = () => {
   const [pageCount, setPageCount] = useState(1);
   const { query, back } = useRouter();
   const search = query.searchTerm;
   const media = query.media;
-  const btnStyle =
-    'bg-secondary-color hover:bg-primary-color transition-all ease-in duration-300 mr-3 sm:px-4 px-2 py-2 sm:text-base text-sm rounded';
 
-  const { data: tv, error } = useSWR(
+  const { data, error } = useSWR(
     `https://api.themoviedb.org/3/search/${media}?api_key=${process.env.API_KEY}&language=en-US&query=${search}&page=${pageCount}&include_adult=false`
   );
-  if (error) console.error(error);
+  if (error) toast.error(error);
 
   const prevPage = () => {
     if (pageCount < 1) return;
@@ -33,18 +34,19 @@ const TvSearchPage = () => {
       </h2>
       <div className="flex items-center justify-between mx-4 sm:mx-0">
         <SearchInput media={media} />
-        <button className={btnStyle} onClick={() => back()}>
+        <button className={`${btnStyle} mr-0`} onClick={() => back()}>
           Go back
         </button>
       </div>
       <div className="my-6 grid mx-4 sm:mx-0">
-        {!error && !tv ? (
+        {!error && !data ? (
           <Loader />
         ) : (
-          tv?.results.map((item) => (
+          data?.results.map((item) => (
             <Card id={item.id} key={item.id} item={item} media={media} />
           ))
         )}
+        {data?.results.length === 0 && <NoResults term={search} />}
       </div>
       <div className="flex justify-center items-center">
         {pageCount > 1 && (
@@ -52,8 +54,8 @@ const TvSearchPage = () => {
             Prev
           </button>
         )}
-        {tv?.results.length < 20 ? null : (
-          <button className={btnStyle} onClick={nextPage}>
+        {data?.results.length < 20 ? null : (
+          <button className={`${btnStyle} ml-4`} onClick={nextPage}>
             Next
           </button>
         )}

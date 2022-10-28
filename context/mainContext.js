@@ -1,12 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import {
-  onSnapshot,
-  orderBy,
-  query,
-  collection,
-  doc,
-  setDoc,
-} from 'firebase/firestore';
+import { onSnapshot, doc, setDoc } from 'firebase/firestore';
 import { db } from '../config/firebase.config';
 import { useSession } from 'next-auth/react';
 import toast from 'react-hot-toast';
@@ -75,7 +68,7 @@ export const MainProvider = ({ children }) => {
       );
       toast.success(`${item?.name} added to your watchlist.`);
     } catch (err) {
-      console.error(err);
+      toast.error(err);
     }
   };
 
@@ -132,7 +125,7 @@ export const MainProvider = ({ children }) => {
       );
       toast.success(`${item?.title} added to your watchlist.`);
     } catch (err) {
-      console.error(err);
+      toast.error(err);
     }
   };
 

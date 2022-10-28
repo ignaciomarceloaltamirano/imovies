@@ -12,11 +12,11 @@ import { useState } from 'react';
 import { Navigation, Pagination, Scrollbar, Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { motion } from 'framer-motion';
+import { btnStyle } from '../../utils/utils';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
-import { btnStyle } from '../../utils/utils';
 
 const Movie = ({ movie, videos, cast }) => {
   const {
@@ -32,7 +32,7 @@ const Movie = ({ movie, videos, cast }) => {
   const { data: similar, error } = useSWR(
     `https://api.themoviedb.org/3/movie/${id}/similar?api_key=${process.env.API_KEY}&language=en-US&page=${pageCount}`
   );
-  if (error) console.error(error);
+  if (error) toast.error(error);
 
   if (!movie || !videos || !cast) return <Loader />;
 

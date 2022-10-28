@@ -8,6 +8,7 @@ const SearchInput = ({ media }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (search === '' || !search) return;
     push(`/search/${media}/${search}`);
   };
 
@@ -19,7 +20,7 @@ const SearchInput = ({ media }) => {
   return (
     <form onSubmit={handleSubmit}>
       <input
-        className="px-2 py-2 inline-block rounded-sm text-black outline-0"
+        className="sm:px-4 px-2 py-2 inline-block rounded-sm text-black outline-0 text-sm sm:w-4/6 w-1/2"
         placeholder="Search"
         onChange={handleChange}
         value={search}

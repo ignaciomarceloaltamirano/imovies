@@ -17,6 +17,7 @@ import { btnStyle, episodeRuntime } from '../../utils/utils';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
+import toast from 'react-hot-toast';
 
 const Movie = ({ tv, videos, cast }) => {
   const {
@@ -32,18 +33,9 @@ const Movie = ({ tv, videos, cast }) => {
   const { data: similar, error } = useSWR(
     `https://api.themoviedb.org/3/tv/${id}/similar?api_key=${process.env.API_KEY}&language=en-US&page=${pageCount}`
   );
-  if (error) console.error(error);
+  if (error) toast.error(error);
 
   if (!tv || !videos || !cast) return <Loader />;
-
-  const prevPage = () => {
-    if (pageCount < 1) return;
-    setPageCount((prev) => prev - 1);
-  };
-
-  const nextPage = () => {
-    setPageCount((prev) => prev + 1);
-  };
 
   const container = {
     hidden: { opacity: 0, y: '-200px' },
@@ -60,6 +52,15 @@ const Movie = ({ tv, videos, cast }) => {
   const item = {
     hidden: { opacity: 0 },
     show: { opacity: 1 },
+  };
+
+  const prevPage = () => {
+    if (pageCount < 1) return;
+    setPageCount((prev) => prev - 1);
+  };
+
+  const nextPage = () => {
+    setPageCount((prev) => prev + 1);
   };
 
   const inWatchlist = watchlist.find((item) => item.id === tv?.id);

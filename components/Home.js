@@ -6,10 +6,12 @@ import TopSeries from './TopSeries';
 const Home = ({ trendingMovies, trendingSeries, topMovies, topSeries }) => {
   return (
     <section className="container mx-auto my-6">
-      <TrendingMovies trendingMovies={trendingMovies} />
-      <TopMovies topMovies={topMovies} />
-      <TrendingSeries trendingSeries={trendingSeries} />
-      <TopSeries topSeries={topSeries} />
+      <main>
+        <TrendingMovies trendingMovies={trendingMovies} />
+        <TopMovies topMovies={topMovies} />
+        <TrendingSeries trendingSeries={trendingSeries} />
+        <TopSeries topSeries={topSeries} />
+      </main>
     </section>
   );
 };
