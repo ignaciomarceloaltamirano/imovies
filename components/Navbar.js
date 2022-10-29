@@ -32,7 +32,7 @@ const Navbar = () => {
             </Link>
           )}
           {watchlist.length > 0 && (
-            <span className="ml-2 bg-primary-color px-2 py-1 text-sm rounded-full">
+            <span className="ml-2 bg-primary-color px-[0.6rem] py-1 text-sm rounded-[50%]">
               {watchlist.length}
             </span>
           )}

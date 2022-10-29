@@ -9,6 +9,7 @@ import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { btnStyle, episodeRuntime, movieRuntime } from '../utils/utils';
 import { motion, AnimatePresence } from 'framer-motion';
+import { MdOutlineAddCircleOutline } from 'react-icons/md';
 
 const WatchlistPage = () => {
   const { watchlist } = useMainContext();
@@ -28,9 +29,29 @@ const WatchlistPage = () => {
   };
   return (
     <section className="container mx-auto my-6">
-      <button className={`${btnStyle} mb-6`} onClick={() => back()}>
-        Go back
-      </button>
+      <div className="sm:mx-0 mx-4">
+        <button className={`${btnStyle} mb-6`} onClick={() => back()}>
+          Go back
+        </button>
+      </div>
+      {watchlist.length < 1 && (
+        <div className="text-center flex items-center justify-center h-[50vh] flex-col sm:mx-0 mx-4 sm:text-lg text-sm">
+          <p className="text-[6rem] text-primary-color">
+            <MdOutlineAddCircleOutline />
+          </p>
+          <h2 className="text- my-2">Your watchlist is empty.</h2>
+          <p className="text-">
+            Add movies and shows to your Watchlist to keep track of what you
+            want to watch.
+          </p>
+          <Link href="/movie">
+            <a className="text-primary-color text- mt-2 mb-0">Browse Movies</a>
+          </Link>
+          <Link href="/tv">
+            <a className="text-primary-color text-">Browse TV Shows</a>
+          </Link>
+        </div>
+      )}
       <AnimatePresence>
         {watchlist.map((item) => (
           <motion.div
